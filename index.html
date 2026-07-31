@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── TOP BAR ── -->
+  <header class="topbar">
+    <div class="topbar__left">
+      <span id="current-date"></span>
+    </div>
+    <div class="topbar__right">
+      <button id="theme-toggle" class="btn btn--icon" aria-label="Toggle dark mode" title="Toggle dark / light mode">
+        <span class="icon-sun">☀️</span>
+        <span class="icon-moon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="dashboard">
+
+    <!-- ── GREETING ── -->
+    <section class="card greeting-card" id="greeting-section">
+      <div class="greeting__text">
+        <h1 id="greeting-message">Good morning!</h1>
+        <p id="current-time" class="greeting__time"></p>
+      </div>
+      <div class="greeting__name-row">
+        <span id="greeting-name-display"></span>
+        <button class="btn btn--ghost btn--sm" id="edit-name-btn" title="Set your name">✏️ Set name</button>
+      </div>
+      <!-- Name edit form (hidden by default) -->
+      <div class="greeting__name-form hidden" id="name-form">
+        <input type="text" id="name-input" class="input" placeholder="Enter your name…" maxlength="40" />
+        <button class="btn btn--primary btn--sm" id="save-name-btn">Save</button>
+        <button class="btn btn--ghost btn--sm" id="cancel-name-btn">Cancel</button>
+      </div>
+    </section>
+
+    <!-- ── FOCUS TIMER ── -->
+    <section class="card timer-card" id="timer-section">
+      <h2 class="card__title">Focus Timer</h2>
+
+      <!-- Pomodoro duration control -->
+      <div class="timer__duration-row">
+        <label for="pomodoro-minutes" class="label">Duration (min):</label>
+        <input type="number" id="pomodoro-minutes" class="input input--sm" min="1" max="120" value="25" />
+        <button class="btn btn--ghost btn--sm" id="apply-duration-btn">Apply</button>
+      </div>
+
+      <div class="timer__display" id="timer-display">25:00</div>
+
+      <div class="timer__progress">
+        <div class="timer__progress-bar" id="timer-progress-bar"></div>
+      </div>
+
+      <div class="timer__controls">
+        <button class="btn btn--primary" id="timer-start-btn">▶ Start</button>
+        <button class="btn btn--secondary" id="timer-stop-btn" disabled>⏸ Pause</button>
+        <button class="btn btn--ghost" id="timer-reset-btn">↺ Reset</button>
+      </div>
+
+      <p class="timer__status" id="timer-status">Ready to focus!</p>
+    </section>
+
+    <!-- ── TO-DO LIST ── -->
+    <section class="card todo-card" id="todo-section">
+      <div class="card__header">
+        <h2 class="card__title">To-Do List</h2>
+        <div class="todo__sort-row">
+          <label for="sort-select" class="label">Sort:</label>
+          <select id="sort-select" class="input input--sm">
+            <option value="default">Default</option>
+            <option value="az">A → Z</option>
+            <option value="za">Z → A</option>
+            <option value="done">Done last</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Add task form -->
+      <div class="todo__add-row">
+        <input type="text" id="todo-input" class="input" placeholder="Add a new task…" maxlength="120" />
+        <button class="btn btn--primary" id="todo-add-btn">Add</button>
+      </div>
+      <p class="error-msg hidden" id="todo-error">Task already exists!</p>
+
+      <!-- Task list -->
+      <ul class="todo__list" id="todo-list" aria-label="Task list">
+        <!-- Tasks injected by JS -->
+      </ul>
+
+      <p class="todo__empty hidden" id="todo-empty">No tasks yet. Add one above!</p>
+    </section>
+
+    <!-- ── QUICK LINKS ── -->
+    <section class="card links-card" id="links-section">
+      <h2 class="card__title">Quick Links</h2>
+
+      <!-- Add link form -->
+      <div class="links__add-row">
+        <input type="text" id="link-name-input" class="input" placeholder="Label (e.g. GitHub)" maxlength="30" />
+        <input type="url" id="link-url-input" class="input" placeholder="https://…" />
+        <button class="btn btn--primary" id="link-add-btn">Add</button>
+      </div>
+
+      <!-- Links grid -->
+      <div class="links__grid" id="links-grid">
+        <!-- Links injected by JS -->
+      </div>
+
+      <p class="links__empty hidden" id="links-empty">No links yet. Add one above!</p>
+    </section>
+
+  </main>
+
+  <!-- ── EDIT TASK MODAL ── -->
+  <div class="modal-overlay hidden" id="edit-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <h3 class="modal__title" id="modal-title">Edit Task</h3>
+      <input type="text" id="edit-task-input" class="input" maxlength="120" />
+      <div class="modal__actions">
+        <button class="btn btn--primary" id="modal-save-btn">Save</button>
+        <button class="btn btn--ghost" id="modal-cancel-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
